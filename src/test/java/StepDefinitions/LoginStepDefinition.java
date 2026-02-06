@@ -25,7 +25,7 @@ public class LoginStepDefinition {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.get("https://www.saucedemo.com/v1/");
-		// driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
+     	// driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
 		driver.manage().window().maximize();
 	}
 	
