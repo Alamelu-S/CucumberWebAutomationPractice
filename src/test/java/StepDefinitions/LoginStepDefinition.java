@@ -10,55 +10,54 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
+import Pages.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class LoginStepDefinition {
-	static WebDriver driver;
+public class LoginStepDefinition 
+{
+	LoginPage loginPage;
+	WebDriver driver;
+	
 	List<WebElement> list = new ArrayList<WebElement>();
 
 	@Given("User is login page")
-	public void userIsLoginPage() {
+	public void userIsLoginPage() 
+	{
 		System.out.println("I am in 1 st method");
-		driver = new ChromeDriver();
+		//driver = new ChromeDriver();
+		driver = Hooks.driver;
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		driver.get("https://www.saucedemo.com/v1/");
-     	// driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
-		driver.manage().window().maximize();
+     	driver.manage().window().maximize();
+		loginPage = new LoginPage(driver);
 	}
 	
 	@When("User enters username as {string}")
 	public void userEntersUsernameAs(String username) 
 	{
-		driver.findElement(By.id("user-name")).sendKeys(username);
-		
+		loginPage.enterUsername(username);
+				
 	}
 	@When("User enters password as {string}")
 	public void userEntersPasswordAs(String password) 
 	{
-		driver.findElement(By.id("password")).sendKeys(password);
+		loginPage.enterPassword(password);
 	}
-
-//	@When("User enters username and password")
-//	public void userEntersUsernameAndPassword() {
-//		driver.findElement(By.id("user-name")).sendKeys("standard_user");
-//		driver.findElement(By.id("password")).sendKeys("secret_sauce");
-//
-//		// driver.findElement(By.id("input-email")).sendKeys("tryautomation@gmail.com");
-//		// driver.findElement(By.id("input-password")).sendKeys("Smile@1617");
-//
-//	}
 
 	@When("Click on login button")
 	public void clickOnLoginButton() {
-		driver.findElement(By.xpath("//input[@id='login-button']")).click();
+		
+		loginPage.clickLogin();
+		//driver.findElement(By.xpath("//input[@id='login-button']")).click();
 		// driver.findElement(By.xpath("//input[@value='Login']")).click();
 	}
 
 	@Then("user navigate to login home page")
-	public void userNavigateToLoginHomePage() {
+	public void userNavigateToLoginHomePage() 
+	{
 		// String tagName = driver.findElement(By.xpath("//title[normalize-space()='My
 		// Account']")).getTagName();
 //		System.out.println("Tagname ::: "+tagName);
@@ -127,44 +126,9 @@ public class LoginStepDefinition {
 	    System.out.println("Message :: "+errorMsg);
 	    Assert.assertEquals(errorMsg, "Epic sadface: Username and "
 	    		+ "password do not match any user in this service");
-	    driver.quit();
+	    //driver.quit();-- this will take from hooks
 	}
 	
 
 }
 
-//public class LoginStepDefinition {
-//	static WebDriver driver;
-//
-//	@Given("User is login page")
-//	public void user_is_login_page() {
-//
-//		
-//
-//	}
-//
-//	@When("User enters username and password")
-//	public void user_enters_username_and_password() {
-//		// Write code here that turns the phrase above into concrete actions
-//		
-//	}
-//
-//	@And("Click on login button")
-//	public void click_on_login_button() 
-//	{
-//		
-//	}
-//
-//	@Then("user navigate to login home page")
-//	public void user_navigate_to_login_home_page() 
-//	{
-//		
-//		
-//	}
-//
-//	@And("Close the browser")
-//	public void close_the_browser() {
-//		driver.close();
-//	}
-//
-//}
