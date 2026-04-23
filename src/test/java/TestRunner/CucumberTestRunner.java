@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions.SnippetType;
 features = {"src/test/resources/Features/login.feature"},
 glue = {"StepDefinitions"},
 snippets = SnippetType.CAMELCASE,
-monochrome = true,
+monochrome = true, // used to remove unnessary colors/ special chars
 
 tags = "not @skip", //If any tags @skip then it will skip that execution
 //plugin = {"pretty","html:target/htmlreport.html"}
